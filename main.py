@@ -17,6 +17,7 @@ from routers import academic_router
 
 from core.database import initialize_database
 from core.security import session_secret
+from seed import seed_demo_data
 
 from repositories.university_repository import (
     get_student_by_user_id,
@@ -43,6 +44,8 @@ BASE_DIR = Path(__file__).resolve().parent
 async def lifespan(_: FastAPI):
 
     initialize_database()
+
+    seed_demo_data()
 
     yield
 
