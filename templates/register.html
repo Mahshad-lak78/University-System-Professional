@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+ثبت نام | سامانه انتخاب واحد
+</title>
+
+
+
+<link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="login-container">
+
+
+<div class="login-box">
+
+
+<h1>
+📝 ثبت نام
+</h1>
+
+
+
+<p>
+برای ایجاد حساب کاربری اطلاعات خود را وارد کنید
+</p>
+
+{% if request.query_params.get("error") %}
+<div style="background:#fee2e2;color:#b91c1c;padding:10px;border-radius:8px;margin-bottom:15px;text-align:center;">این نام کاربری قبلاً ثبت شده است.</div>
+{% endif %}
+
+
+
+
+<form action="/auth/register" method="POST">
+
+
+
+
+
+<div class="input-box">
+
+
+<span>
+👤
+</span>
+
+
+<input
+
+type="text"
+
+name="fullname"
+
+placeholder="نام و نام خانوادگی"
+
+required>
+
+
+</div>
+
+
+
+
+
+<div class="input-box">
+
+
+<span>
+🆔
+</span>
+
+
+<input
+
+type="text"
+
+name="username"
+
+placeholder="نام کاربری"
+
+required>
+
+
+</div>
+
+
+
+
+
+<div class="input-box">
+
+
+<span>
+🔒
+</span>
+
+
+
+<input
+
+id="password"
+
+type="password"
+
+name="password"
+
+placeholder="رمز عبور"
+
+required>
+
+
+
+
+<button
+
+type="button"
+
+id="showPassword">
+
+👁️
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+<button
+
+class="login-btn"
+
+type="submit">
+
+ثبت نام
+
+</button>
+
+
+
+
+
+
+<div class="register">
+
+
+قبلاً ثبت نام کرده‌اید؟
+
+
+
+<a href="/">
+
+ورود
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+</form>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<script src="{{ url_for('static', path='js/app.js') }}"></script>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+سامانه انتخاب واحد دانشگاه
+</title>
+
+
+<link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="login-container">
+
+
+<div class="login-box">
+
+
+
+<h1>
+🎓 سامانه انتخاب واحد
+</h1>
+
+
+
+<p>
+لطفاً وارد حساب کاربری خود شوید
+</p>
+
+
+
+{% if request.query_params.get("error") %}
+
+<div style="
+background:#fee2e2;
+color:#b91c1c;
+padding:10px;
+border-radius:8px;
+margin-bottom:15px;
+text-align:center;
+">
+
+نام کاربری یا رمز عبور اشتباه است
+
+</div>
+
+{% endif %}
+
+{% if request.query_params.get("registered") %}
+<div style="background:#dcfce7;color:#166534;padding:10px;border-radius:8px;margin-bottom:15px;text-align:center;">ثبت‌نام با موفقیت انجام شد. اکنون وارد شوید.</div>
+{% endif %}
+
+
+
+
+
+<form action="/auth/web-login" method="POST">
+
+
+
+<div class="input-box">
+
+
+<span>
+👤
+</span>
+
+
+<input
+
+type="text"
+
+name="username"
+
+placeholder="نام کاربری"
+
+required>
+
+
+</div>
+
+
+
+
+
+
+<div class="input-box">
+
+
+<span>
+🔒
+</span>
+
+
+
+<input
+
+id="password"
+
+type="password"
+
+name="password"
+
+placeholder="رمز عبور"
+
+required>
+
+
+
+<button
+
+type="button"
+
+id="showPassword">
+
+👁️
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="options">
+
+
+<label>
+
+
+<input
+
+type="checkbox"
+
+name="remember">
+
+
+مرا به خاطر بسپار
+
+
+</label>
+
+
+
+
+<a href="#">
+
+فراموشی رمز عبور
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+<button
+
+class="login-btn"
+
+type="submit">
+
+ورود
+
+
+</button>
+
+
+
+
+
+
+<div class="register">
+
+
+حساب کاربری ندارید؟
+
+
+<a href="/register">
+
+ثبت نام
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+</form>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<script src="{{ url_for('static', path='js/app.js') }}"></script>
+
+
+</body>
+
+
+</html>

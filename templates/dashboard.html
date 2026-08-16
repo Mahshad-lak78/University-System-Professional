@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>داشبورد دانشجو</title>
+
+
+<link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+
+
+<style>
+
+
+@font-face {
+
+    font-family: blotus;
+
+    src: url("/static/fonts/Blotus.ttf");
+
+}
+
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+
+body{
+
+
+    margin:0;
+
+    font-family:blotus,tahoma,Arial;
+
+    background:
+    linear-gradient(
+        135deg,
+        #eef5ff,
+        #dbeafe
+    );
+
+
+    min-height:100vh;
+
+
+}
+
+
+
+/* هدر */
+
+.header{
+
+
+    position:fixed;
+
+
+    top:0;
+
+    right:0;
+
+
+    width:100%;
+
+
+    height:125px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #063970,
+        #145da0
+    );
+
+
+    color:white;
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+    padding:0 70px;
+
+
+    border-bottom:5px solid #eab308;
+
+
+    z-index:100;
+
+
+    box-shadow:
+
+    0 10px 30px rgba(0,0,0,.2);
+
+
+
+}
+
+
+
+.title h1{
+
+
+    margin:0;
+
+    font-size:38px;
+
+
+}
+
+
+.title p{
+
+
+    margin-top:10px;
+
+    font-size:18px;
+
+}
+
+
+
+.user{
+
+
+    text-align:left;
+
+}
+
+
+
+.user h3{
+
+
+    margin:0;
+
+    font-size:22px;
+
+}
+
+
+
+.logout{
+
+
+    margin-top:15px;
+
+
+    background:#dc2626;
+
+
+    border:none;
+
+
+    color:white;
+
+
+    padding:10px 25px;
+
+
+    border-radius:12px;
+
+
+    cursor:pointer;
+
+
+    font-family:inherit;
+
+
+}
+
+
+
+
+/* بخش اصلی */
+
+
+.container{
+
+
+    padding-top:170px;
+
+
+    width:90%;
+
+
+    max-width:1200px;
+
+
+    margin:auto;
+
+
+}
+
+
+
+.heading{
+
+
+    text-align:right;
+
+
+    margin-bottom:50px;
+
+
+}
+
+
+
+.heading h2{
+
+
+    color:#063970;
+
+
+    font-size:32px;
+
+
+    margin-bottom:10px;
+
+
+}
+
+
+.heading p{
+
+
+    color:#555;
+
+    font-size:18px;
+
+}
+
+
+
+
+.cards{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(3,1fr);
+
+
+    gap:35px;
+
+
+}
+
+
+
+
+.card{
+
+
+    background:
+
+    rgba(255,255,255,.45);
+
+
+    backdrop-filter:blur(15px);
+
+
+    border-radius:25px;
+
+
+    padding:40px 25px;
+
+
+    text-align:center;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.8);
+
+
+    box-shadow:
+
+    0 20px 40px rgba(0,0,0,.12);
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.card:hover{
+
+
+    transform:translateY(-10px);
+
+
+}
+
+
+
+.icon{
+
+
+    font-size:55px;
+
+}
+
+
+
+.card h3{
+
+
+    color:#063970;
+
+
+    font-size:28px;
+
+
+}
+
+
+
+.card p{
+
+
+    color:#444;
+
+    line-height:2;
+
+
+    font-size:17px;
+
+
+}
+
+
+
+.card a{
+
+
+    display:inline-block;
+
+
+    margin-top:20px;
+
+
+    background:#145da0;
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    padding:12px 40px;
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+.card a:hover{
+
+
+    background:#063970;
+
+
+}
+
+
+
+
+
+@media(max-width:900px){
+
+
+.cards{
+
+
+grid-template-columns:1fr;
+
+
+}
+
+
+.header{
+
+
+padding:0 25px;
+
+
+}
+
+
+
+.title h1{
+
+
+font-size:25px;
+
+
+}
+
+
+}
+
+
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+<header class="header">
+
+
+<div class="title">
+
+
+<h1>
+سامانه جامع آموزشی
+</h1>
+
+
+<p>
+پنل دانشجویی
+</p>
+
+
+</div>
+
+
+
+
+<div class="user">
+
+
+<h3>
+خوش آمدید
+<br>
+{{ fullname }}
+</h3>
+
+
+
+<form action="/auth/logout" method="post">
+
+
+<button class="logout">
+
+خروج
+
+</button>
+
+
+</form>
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+<main class="container">
+
+
+
+<div class="heading">
+
+
+<h2>
+
+داشبورد دانشجو
+
+</h2>
+
+
+<p>
+
+مدیریت انتخاب واحد و اطلاعات دانشجویی
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="cards">
+
+
+
+<div class="card">
+
+
+<div class="icon">
+
+📚
+
+</div>
+
+
+<h3>
+
+انتخاب واحد
+
+</h3>
+
+
+<p>
+
+مشاهده دروس ارائه شده و ثبت انتخاب واحد
+
+</p>
+
+
+
+<a href="/courses">
+
+ورود
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<div class="icon">
+
+📖
+
+</div>
+
+
+<h3>
+
+دروس من
+
+</h3>
+
+
+<p>
+
+مشاهده لیست درس‌های انتخاب شده
+
+</p>
+
+
+
+<a href="/my-courses">
+
+مشاهده
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<div class="icon">
+
+👤
+
+</div>
+
+
+<h3>
+
+پروفایل
+
+</h3>
+
+
+<p>
+
+مشاهده اطلاعات شخصی دانشجو
+
+</p>
+
+
+
+<a href="/profile">
+
+ورود
+
+</a>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</main>
+
+
+
+
+</body>
+
+
+</html>

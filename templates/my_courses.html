@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+درس‌های من
+</title>
+
+
+<link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+
+
+<style>
+
+body{
+
+    background:#f5f7fb;
+    font-family:tahoma;
+
+}
+
+
+.container{
+
+    width:90%;
+    max-width:1000px;
+    margin:40px auto;
+
+}
+
+
+
+h1{
+
+    color:#2563eb;
+    text-align:center;
+
+}
+
+
+
+
+table{
+
+    width:100%;
+    background:white;
+    border-collapse:collapse;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+}
+
+
+
+th{
+
+    background:#2563eb;
+    color:white;
+    padding:15px;
+
+}
+
+
+
+td{
+
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+
+}
+
+
+
+
+.delete-btn{
+
+    background:#dc2626;
+    color:white;
+    padding:8px 15px;
+    border-radius:8px;
+    text-decoration:none;
+
+}
+
+
+
+.delete-btn:hover{
+
+    background:#b91c1c;
+
+}
+
+
+
+
+.back{
+
+    display:inline-block;
+    margin-top:20px;
+
+    background:#2563eb;
+    color:white;
+
+    padding:10px 20px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+}
+
+
+
+.empty{
+
+    text-align:center;
+    padding:20px;
+    color:#777;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="container">
+
+
+
+<h1>
+📚 درس‌های انتخاب شده
+</h1>
+
+{% if message %}<p class="empty">{{ message }}</p>{% endif %}
+
+
+
+<table>
+
+
+<tr>
+
+<th>
+نام درس
+</th>
+
+
+<th>
+تعداد واحد
+</th>
+
+
+<th>
+استاد
+</th>
+
+
+<th>
+ظرفیت
+</th>
+
+
+<th>
+عملیات
+</th>
+
+
+</tr>
+
+
+
+
+
+{% if courses %}
+
+
+
+{% for course in courses %}
+
+
+
+<tr>
+
+
+<td>
+
+{{ course.course_name }}
+
+</td>
+
+
+
+<td>
+
+{{ course.units }}
+
+</td>
+
+
+
+<td>
+
+{{ course.teacher }}
+
+</td>
+
+
+
+<td>
+
+{{ course.capacity }}
+
+</td>
+
+
+
+<td>
+
+
+<form action="/drop/{{ course.id }}" method="post">
+<button class="delete-btn" type="submit">حذف درس</button>
+</form>
+
+
+</td>
+
+
+</tr>
+
+
+
+{% endfor %}
+
+
+
+
+
+{% else %}
+
+
+
+<tr>
+
+<td colspan="5" class="empty">
+
+هنوز هیچ درسی انتخاب نکرده‌اید.
+
+</td>
+
+</tr>
+
+
+
+
+{% endif %}
+
+
+
+
+</table>
+
+
+
+
+
+<a class="back" href="/dashboard">
+
+بازگشت به داشبورد
+
+</a>
+
+
+
+</div>
+
+
+
+</body>
+
+
+</html>

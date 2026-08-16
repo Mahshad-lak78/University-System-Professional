@@ -1,0 +1,22 @@
+services:
+  university-system:
+    build: .
+    container_name: university-system-app
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./university.db:/app/university.db
+
+    environment:
+      UNIVERSITY_DB_PATH: ${UNIVERSITY_DB_PATH}
+      SESSION_SECRET: ${SESSION_SECRET}
+
+    restart: always
+
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

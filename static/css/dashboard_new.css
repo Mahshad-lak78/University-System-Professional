@@ -1,0 +1,75 @@
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.university-icon {
+    font-size: 42px;
+}
+
+.header-brand h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.header-brand p {
+    margin: 6px 0 0;
+    font-size: 17px;
+}
+
+.header-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.header-user span {
+    font-size: 15px;
+}
+
+.header-user strong {
+    font-size: 20px;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 25px 0 35px;
+    flex-wrap: wrap;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #174a7e;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: 0.25s;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: #0b4f86;
+    color: white;
+}
+
+.card-icon {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #064e89;
+    font-size: 25px;
+    margin: 10px 0;
+}
+
+.card p {
+    min-height: 48px;
+    line-height: 1.8;
+}

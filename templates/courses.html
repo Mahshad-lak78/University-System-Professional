@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>انتخاب واحد</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='css/style.css') }}"
+    >
+
+    <style>
+
+        body {
+            background: #f4f6f9;
+            font-family: tahoma;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2563eb;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,.1);
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .select-btn {
+            background: #22c55e;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .select-btn:hover {
+            background: #16a34a;
+        }
+
+        .select-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .remaining {
+            font-weight: bold;
+            color: #16a34a;
+        }
+
+        .full {
+            font-weight: bold;
+            color: #dc2626;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            background: #2563eb;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        📚 انتخاب واحد
+    </h1>
+
+    {% if message %}
+        <p class="empty">{{ message }}</p>
+    {% endif %}
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>کد درس</th>
+                <th>نام درس</th>
+                <th>واحد</th>
+                <th>استاد</th>
+                <th>ظرفیت کل</th>
+                <th>ثبت‌نام شده</th>
+                <th>ظرفیت باقی‌مانده</th>
+                <th>عملیات</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% if courses %}
+
+            {% for course in courses %}
+
+                <tr>
+
+                    <td>
+                        {{ course.course_code }}
+                    </td>
+
+                    <td>
+                        {{ course.course_name }}
+                    </td>
+
+                    <td>
+                        {{ course.units }}
+                    </td>
+
+                    <td>
+                        {{ course.teacher }}
+                    </td>
+
+                    <td>
+                        {{ course.capacity }}
+                    </td>
+
+                    <td>
+                        {{ course.enrolled_count }}
+                    </td>
+
+                    <td>
+
+                        {% if course.remaining_capacity > 0 %}
+
+                            <span class="remaining">
+                                {{ course.remaining_capacity }}
+                            </span>
+
+                        {% else %}
+
+                            <span class="full">
+                                تکمیل ظرفیت
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if course.remaining_capacity > 0 %}
+
+                            <form
+                                action="/enroll/{{ course.id }}"
+                                method="post"
+                            >
+
+                                <button
+                                    class="select-btn"
+                                    type="submit"
+                                >
+                                    انتخاب درس
+                                </button>
+
+                            </form>
+
+                        {% else %}
+
+                            <button
+                                class="select-btn"
+                                type="button"
+                                disabled
+                            >
+                                ظرفیت تکمیل
+                            </button>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+        {% else %}
+
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty"
+                >
+                    درسی برای نمایش وجود ندارد
+                </td>
+
+            </tr>
+
+        {% endif %}
+
+        </tbody>
+
+    </table>
+
+    <a
+        class="back"
+        href="/dashboard"
+    >
+        بازگشت به داشبورد
+    </a>
+
+</div>
+
+</body>
+
+</html>

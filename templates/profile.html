@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+پروفایل دانشجو
+</title>
+
+
+<link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+
+
+<style>
+
+
+body{
+
+    background:#f5f7fb;
+    font-family:tahoma;
+
+}
+
+
+
+.profile-box{
+
+    width:400px;
+
+    margin:50px auto;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+    text-align:center;
+
+}
+
+
+
+.avatar{
+
+
+    width:90px;
+
+    height:90px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border-radius:50%;
+
+    margin:0 auto 20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:40px;
+
+
+}
+
+
+
+
+h1{
+
+    color:#2563eb;
+
+    margin-bottom:25px;
+
+}
+
+
+
+
+.info{
+
+
+    background:#f1f5f9;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-top:15px;
+
+    text-align:right;
+
+}
+
+
+
+.info p{
+
+    margin:10px 0;
+
+    font-size:17px;
+
+}
+
+
+
+a{
+
+
+    display:inline-block;
+
+    margin-top:25px;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:10px 25px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+
+}
+
+
+.empty{
+
+    color:#777;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="profile-box">
+
+
+
+<div class="avatar">
+
+👤
+
+</div>
+
+
+
+<h1>
+
+پروفایل دانشجو
+
+</h1>
+
+
+
+
+{% if student %}
+
+
+
+<div class="info">
+
+
+<p>
+
+<strong>
+نام:
+</strong>
+
+
+{{ student.fullname | default("---") }}
+
+</p>
+
+
+
+<p>
+
+<strong>
+نام کاربری:
+</strong>
+
+
+{{ student.username | default("---") }}
+
+</p>
+
+
+
+</div>
+
+
+
+{% else %}
+
+
+
+<div class="info empty">
+
+اطلاعات دانشجو یافت نشد
+
+</div>
+
+
+
+{% endif %}
+
+
+
+
+<a href="/dashboard">
+
+بازگشت به داشبورد
+
+</a>
+
+
+
+</div>
+
+
+
+</body>
+
+</html>
